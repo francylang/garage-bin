@@ -73,13 +73,13 @@ const postItem = (event) => {
 
 
 const toggleGarage = () => {
-  console.log();
   $('.garage-door').slideToggle(3000, () => {
     const text = $('.garage-opener').text();
     text === 'Open Garage' ?
       $('.garage-opener').text('Close Garage') :
       $('.garage-opener').text('Open Garage')
   });
+  // $('.append-item').toggleClass('append-reveal')
 }
 
 $('.garage-opener').on('click', toggleGarage)

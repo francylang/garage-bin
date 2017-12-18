@@ -19,18 +19,12 @@
   cursor: pointer;
 }
 
-.hide-content {
-  display: none;
-}
-
-.reveal {
-  display: block;
-}
 
 .garage-opener {
-  height: 20px;
-  width: 40px;
-  background-color: #414456;
+  height: 50px;
+  width: 100px;
+  border: 1px solid #414456;
+  cursor: pointer;
 }
 
 .garage-door {
@@ -38,9 +32,10 @@
   width: 100%;
   background-color: #2A2C37;
   overflow: hidden;
-  position: absolute; }
+  position: absolute;
+  z-index: 100;
+}
 
-
-  /*height: 75vh;*/
-  /*width: 100vw;*/
-  /*background-color: #414456;*/
+.append-reveal {
+  display: block;
+}
