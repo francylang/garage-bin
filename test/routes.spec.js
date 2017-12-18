@@ -49,10 +49,93 @@ describe('API Routes', () => {
         response.body[0].should.have.property('created_at');
         response.body[0].should.have.property('updated_at');
       })
-      .catch(error => {
-        throw error;
+      .catch(error => { throw error; });
+    });
+  });
+
+  describe('GET /api/v1/items/:id', () => {
+
+    it('should return a single item', () => {
+      return chai.request(server)
+      .get('/api/v1/items/2')
+      .then(response => {
+        response.should.have.status(200);
+        response.should.be.json;
+        response.body.should.be.a('array');
+      })
+    })
+
+    it('should return 404 if item does not exist', () => {
+         chai.request(server)
+          .get('/api/v1/items/oopsie')
+          .end((error, response) => {
+            // response.should.have.status(404);
+            // response.body.should.have.property('error');
+            // response.body.error.should.equal('Unable to locate record with id of loser')
+          });
+      });
+    });
+
+  describe('POST /api/v1/items', () => {
+
+    it('should be able to add an item to the database', () => {
+      return chai.request(server)
+        .post('/api/v1/items')
+        .send({
+           item: 'goKart',
+           reason: 'kids love it',
+           cleanliness: 'sparkling'
+         })
+         .then(response => {
+           response.should.have.status(201);
+          //  response.body.should.be.a('array');
+          //  response.body.should.have.property('id');
+         })
+         .catch(error => { throw error; });
+      });
+
+      it('should not be able to add a new item if property is missing', () => {
+        chai.request(server)
+          .post('/api/v1/items')
+          .send({
+            item: 'train',
+          })
+          .end((error, response) => {
+            response.should.have.status(422);
+          });
       });
     })
 
-  })
+    describe('PATCH /api/v1/items/:id', () => {
+    const updateItem = {
+      cleanliness: 'sparkling',
+    };
+
+    it('should be able to update the body of an item object', () => {
+      chai.request(server)
+        .patch('/api/v1/items/1')
+        .send(updateItem)
+        .end((error, response) => {
+          response.should.have.status(204);
+          chai.request(server)
+            .get('/api/v1/items/1')
+            .end((error, response) => {
+              response.body.should.be.a('array');
+              response.body[1].should.have.property('body');
+              response.body[1].body.should.equal(updateItem.body);
+            });
+        });
+    });
+
+    it.skip('should throw an error if an item id is not provided', () => {
+      return chai.request(server)
+        .patch('/api/v1/items/1')
+        .send({})
+        .then((response) => {
+          response.should.have.status(422);
+          // response.body.should.have.property('id');
+          // response.body.error.should.equal('No resource with an id of 2 was found.');
+        });
+    });
+  });
 });
