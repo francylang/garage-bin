@@ -28,7 +28,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get('/api/v1/items', (request, response) => {
   database('garage_items').select()
     .then(items => {
-      console.log(items);
       return response.status(200).json(items);
     })
     .catch(error => {
