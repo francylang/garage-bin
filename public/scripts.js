@@ -6,10 +6,20 @@ const appendItem = (item) => {
   $('.append-item').append(
     ` <div class="item">
          <h2 class="item-title">${item.item}</h2>
-         <h2 class="item-reason">${item.reason}</h2>
-         <h2 class="item-reason">${item.cleanliness}</h2>
+         <div class="hide-content">
+           <h2 class="item-reason">${item.reason}</h2>
+           <h2 class="item-reason">${item.cleanliness}</h2>
+         </div>
       </div>`
   );
+}
+
+$('.append-item').on('click', '.item',
+  (event => revealContent(event.target)))
+
+const revealContent = () => {
+  console.log(event.target);
+  $(event.target).toggleClass('reveal');
 }
 
 const displayCount = (items) => {
@@ -53,7 +63,6 @@ const postItem = (event) => {
   })
     .then(response => response.json())
     .then(item => {
-      // appendItem(item)
       fetchItems()
     })
     .catch(error => console.log(error))
@@ -62,9 +71,21 @@ const postItem = (event) => {
     $('.cleanliness').val('');
 }
 
-const displayContent = () => {
-  $(event.target).toggleClass('item-info');
+
+const toggleGarage = () => {
+  console.log();
+  $('.garage-door').slideToggle(3000, () => {
+    const text = $('.garage-opener').text();
+    text === 'Open Garage' ?
+      $('.garage-opener').text('Close Garage') :
+      $('.garage-opener').text('Open Garage')
+  });
 }
 
+$('.garage-opener').on('click', toggleGarage)
 $('.new-item-save').on('click', postItem);
-$('.item').on('click', displayContent);
+
+
+// $('body').click(function(){
+//     $("p").slideToggle();
+// });

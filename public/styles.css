@@ -14,3 +14,33 @@
 .item-info {
   border: 1px solid blue;
 }
+
+.item-title {
+  cursor: pointer;
+}
+
+.hide-content {
+  display: none;
+}
+
+.reveal {
+  display: block;
+}
+
+.garage-opener {
+  height: 20px;
+  width: 40px;
+  background-color: #414456;
+}
+
+.garage-door {
+  height: 75vh;
+  width: 100%;
+  background-color: #2A2C37;
+  overflow: hidden;
+  position: absolute; }
+
+
+  /*height: 75vh;*/
+  /*width: 100vw;*/
+  /*background-color: #414456;*/
