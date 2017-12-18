@@ -26,6 +26,7 @@ const countCleanliness = (items, status) => {
 }
 
 const appendAllItems = (items) => {
+  $('.append-item').html('')
   items.forEach(item => appendItem(item))
 }
 
@@ -43,7 +44,7 @@ const postItem = (event) => {
   event.preventDefault();
   const newItem = $('.item-name').val();
   const newReason = $('.reason').val();
-  const newCleanliness = $('.cleanliness').val();
+  const newCleanliness = $('.status').val();
 
   fetch('/api/v1/items', {
     method: 'POST',
@@ -52,13 +53,18 @@ const postItem = (event) => {
   })
     .then(response => response.json())
     .then(item => {
-      console.log(item);
-      appendItem(item)
+      // appendItem(item)
+      fetchItems()
     })
     .catch(error => console.log(error))
+    $('.item-name').val('');
+    $('.reason').val('');
+    $('.cleanliness').val('');
 }
 
-
-
+const displayContent = () => {
+  $(event.target).toggleClass('item-info');
+}
 
 $('.new-item-save').on('click', postItem);
+$('.item').on('click', displayContent);

@@ -10,3 +10,7 @@
   flex-wrap: wrap;
   border: 1px solid red;
 }
+
+.item-info {
+  border: 1px solid blue;
+}
