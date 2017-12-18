@@ -3,11 +3,22 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles.css">
+
     <title>Garage Bin</title>
   </head>
   <body>
     <main>
+      <h1>Garage Bin</h1>
+      <form>
+        <input class="item-name" type="text" placeholder="item"/>
+        <input class="reason" type="text" placeholder="reason" />
+        <input class="cleanliness" type="text" placeholder="cleanliness" />
+        <input class="new-item-save" type="submit" />
+      </form>
+      <div class="append-item"></div>
     </main>
-
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+    <script type='text/javascript' src='./scripts.js'></script>
   </body>
 </html>
