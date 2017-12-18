@@ -79,13 +79,7 @@ const toggleGarage = () => {
       $('.garage-opener').text('Close Garage') :
       $('.garage-opener').text('Open Garage')
   });
-  // $('.append-item').toggleClass('append-reveal')
 }
 
 $('.garage-opener').on('click', toggleGarage)
 $('.new-item-save').on('click', postItem);
-
-
-// $('body').click(function(){
-//     $("p").slideToggle();
-// });

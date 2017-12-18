@@ -1,18 +1,50 @@
-.item {
-  font-size: 12px;
-  border: 1px solid green;
-  width: 30%;
+body {
+  font-family: 'Montserrat', sans-serif;
+  display: flex;
 }
 
+input {
+  width: 25%;
+  background-color: transparent;
+  border: none;
+  border: 1px solid #bdbdbd;
+  font-size: 20px;
+  font-weight: lighter;
+  margin: 10px 0;
+}
+
+.item {
+  align-items: center;
+  width: 150px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin: 14px;
+  padding: 0px 10px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  box-shadow: 0px 1px 5px 0px #676767;
+  box-shadow: 2px 4px 12px 0px #888888;
+  border-radius: 8%;
+}
+
+h2 {
+  text-transform: capitalize;
+}
 
 .append-item {
   display: flex;
   flex-wrap: wrap;
-  border: 1px solid red;
+  /*height: 60vh;*/
+  width: 100vw;
 }
 
 .item-info {
   border: 1px solid blue;
+}
+
+h2 {
+  font-size: 12px;
 }
 
 .item-title {
@@ -20,22 +52,37 @@
 }
 
 
-.garage-opener {
-  height: 50px;
-  width: 100px;
+.garage-opener,
+.new-item-save {
   border: 1px solid #414456;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #414456;
+  background-color: transparent;
+  font-size: 18px;
+  text-decoration: none;
+  padding: 4px 10px;
+  margin: 45px;
+  width: 198px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.new-item-save {
+  display: inline-block;
 }
 
 .garage-door {
   height: 75vh;
   width: 100%;
-  background-color: #2A2C37;
+  background-color: #405780;
   overflow: hidden;
   position: absolute;
   z-index: 100;
 }
 
 .append-reveal {
-  display: block;
+  /*display: block;*/
 }
