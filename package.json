@@ -1,0 +1,23 @@
+{
+  "name": "final",
+  "version": "1.0.0",
+  "description": "",
+  "main": "knexfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/francylang/garage-bin.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/francylang/garage-bin/issues"
+  },
+  "homepage": "https://github.com/francylang/garage-bin#readme",
+  "dependencies": {
+    "knex": "^0.14.2"
+  }
+}
