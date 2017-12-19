@@ -11,9 +11,11 @@ input {
   font-size: 20px;
   font-weight: lighter;
   margin: 10px 0;
+  padding: 5px 10px;
 }
 
-h1 {
+h1,
+h4 {
   color: #414456;
   margin-left: 40px;
 }
@@ -43,7 +45,7 @@ form {
 }
 
 .status {
-  width: 325px;
+  width: 368px;
   height: 26px;
   cursor: pointer;
 }
@@ -85,7 +87,7 @@ h2 {
 .new-item-save {
   display: inline-block;
   margin: 16px 0;
-  width: 348px;
+  width: 368px;
 }
 
 .new-item-save:hover {
@@ -103,13 +105,16 @@ h2 {
   background-image: url('../assets/door.jpg');
   background-repeat: no-repeat;
   background-size: cover;
-
 }
 
-/*.hide-content {
-  display: flex;
-  flex-direction: column;
-}*/
+.garage-opener {
+  width: 90%;
+  padding: 10px 0;
+}
+.garage-opener:hover {
+  color: #fff;
+  background-color: #414456;
+}
 
 .inactive {
   display: none;
@@ -126,4 +131,10 @@ h2 {
   background-color: #405780;
   width: 100%;
   color: white;
+}
+
+.append-count {
+  display: flex;
+  justify-content: space-around;
+  color: #405780;
 }
