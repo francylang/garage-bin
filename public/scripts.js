@@ -6,7 +6,13 @@ const appendItem = (item) => {
        </div>
          <div class="item-id-${item.id} inactive">
            <h2 class="item-reason">${item.reason}</h2>
-           <h2 class="item-reason">${item.cleanliness}</h2>
+           <h2 class="item-reason clean-${item.id}">${item.cleanliness}</h2>
+       <select class="status-update" value="Select Condition" id='item${item.id}'>
+         <option class="dropdown-option">Update Status</option>
+         <option class="dropdown-option" value='Sparkling'>Sparkling</option>
+         <option class="dropdown-option" value='Dusty'>Dusty</option>
+         <option class="dropdown-option" value='Rancid'>Rancid</option>
+       </select>
          </div>
       </div>`
   );
@@ -86,20 +92,31 @@ const revealContent = (event) => {
   revealMe.toggleClass('active')
 }
 
-const sortItems = () => {
-  const sorted = items.sort((a, b) => {
-  const nameA = a.name.toUpperCase();
-  const nameB = b.name.toUpperCase();
-  if (nameA < nameB) {
-    return -1;
+const patchStatus = (id, body) => {
+  fetch(`/api/v1/items/${id}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(body)
+  })
+    .then(response => response.json())
+    .catch(error => console.log(error));
+};
+
+const updateStatus = () => {
+  const updateClean = {
+    cleanliness: $(event.target).val()
   }
-  if (nameA > nameB) {
-    return 1;
-  }
-  return 0;
-  });
+  console.log(updateClean);
+  const id = $(event.target).closest('.status-update').attr('id').slice(4)
+  console.log(id);
+
+  patchStatus(id, updateClean)
+  $(`.clean-${id}`).text(`${$(event.target).val()}`)
 }
 
+$('.append-item').on('change', 'select', (event) => updateStatus(event))
 $('.garage-opener').on('click', toggleGarage)
 $('.new-item-save').on('click', postItem);
 $('.append-item').on('click', '.item-title', (event) => revealContent(event));
