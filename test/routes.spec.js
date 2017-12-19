@@ -9,32 +9,28 @@ const database = require('knex')(configuration);
 
 chai.use(chaiHttp);
 
-describe('Client Routes', () => {
-
-});
+describe('Client Routes', () => {});
 
 describe('API Routes', () => {
   before((done) => {
     database.migrate.latest()
-      .then(() => done())
-      .catch((error) => {
-        throw error;
-      });
+    .then(() => done())
+    .catch((error) => {
+      throw error;
+    });
   });
 
   beforeEach((done) => {
     database.seed.run()
-      .then(() => done())
-      .catch((error) => {
-        throw error;
-      });
+    .then(() => done())
+    .catch((error) => {
+      throw error;
+    });
   });
 
   describe('GET /api/v1/items', () => {
     it('should return all of the items', () => {
-      return chai.request(server)
-      .get('/api/v1/items')
-      .then(response => {
+      return chai.request(server).get('/api/v1/items').then(response => {
         response.should.have.status(200);
         response.should.be.json;
         response.body.should.be.a('array');
@@ -48,8 +44,18 @@ describe('API Routes', () => {
         response.body.includes('dusty');
         response.body[0].should.have.property('created_at');
         response.body[0].should.have.property('updated_at');
-      })
-      .catch(error => { throw error; });
+      }).catch(error => {
+        throw error;
+      });
+    });
+
+    it('should return a 404 if path does not exist', (done) => {
+      chai.request(server)
+        .get('/api/v1/sad')
+        .end((error, response) => {
+          response.should.have.status(404);
+          done();
+      });
     });
   });
 
@@ -65,50 +71,47 @@ describe('API Routes', () => {
       })
     })
 
-    it('should return 404 if item does not exist', () => {
-         chai.request(server)
-          .get('/api/v1/items/oopsie')
-          .end((error, response) => {
-            // response.should.have.status(404);
-            // response.body.should.have.property('error');
-            // response.body.error.should.equal('Unable to locate record with id of loser')
-          });
+    it('should return a 404 if path does not exist', (done) => {
+      chai.request(server)
+        .get('/api/v1/sad')
+        .end((error, response) => {
+        response.should.have.status(404);
+        done();
       });
     });
+  });
 
   describe('POST /api/v1/items', () => {
 
     it('should be able to add an item to the database', () => {
       return chai.request(server)
+      .post('/api/v1/items').send({
+          item: 'goKart',
+          reason: 'kids love it',
+          cleanliness: 'sparkling'
+        })
+        .then(response => {
+        response.should.have.status(201);
+        response.body.should.be.a('array');
+      })
+      .catch(error => {
+        throw error;
+      });
+    });
+
+    it('should not be able to add a new item if property is missing', () => {
+      chai.request(server)
         .post('/api/v1/items')
-        .send({
-           item: 'goKart',
-           reason: 'kids love it',
-           cleanliness: 'sparkling'
-         })
-         .then(response => {
-           response.should.have.status(201);
-          //  response.body.should.be.a('array');
-          //  response.body.should.have.property('id');
-         })
-         .catch(error => { throw error; });
+        .send({item: 'train'})
+        .end((error, response) => {
+          response.should.have.status(422);
       });
+    });
+  })
 
-      it('should not be able to add a new item if property is missing', () => {
-        chai.request(server)
-          .post('/api/v1/items')
-          .send({
-            item: 'train',
-          })
-          .end((error, response) => {
-            response.should.have.status(422);
-          });
-      });
-    })
-
-    describe('PATCH /api/v1/items/:id', () => {
+  describe('PATCH /api/v1/items/:id', () => {
     const updateItem = {
-      cleanliness: 'sparkling',
+      cleanliness: 'sparkling'
     };
 
     it('should be able to update the body of an item object', () => {
@@ -117,25 +120,26 @@ describe('API Routes', () => {
         .send(updateItem)
         .end((error, response) => {
           response.should.have.status(204);
-          chai.request(server)
-            .get('/api/v1/items/1')
-            .end((error, response) => {
-              response.body.should.be.a('array');
-              response.body[1].should.have.property('body');
-              response.body[1].body.should.equal(updateItem.body);
-            });
+
+        chai.request(server)
+          .get('/api/v1/items/1')
+          .end((error, response) => {
+          response.body.should.be.a('array');
+          response.body[1].should.have.property('body');
+          response.body[1].body.should.equal(updateItem.body);
         });
+      });
     });
 
-    it.skip('should throw an error if an item id is not provided', () => {
-      return chai.request(server)
-        .patch('/api/v1/items/1')
-        .send({})
-        .then((response) => {
-          response.should.have.status(422);
-          // response.body.should.have.property('id');
-          // response.body.error.should.equal('No resource with an id of 2 was found.');
-        });
-    });
+
+    it.skip('should throw a 422 if item cleanliness is not provided', (done) => {
+         chai.request(server)
+           .patch('/api/v1/items/1')
+           .send()
+           .end((error, response) => {
+             response.should.have.status(422);
+             done();
+           });
+       });
   });
 });

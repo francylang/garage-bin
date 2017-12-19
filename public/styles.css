@@ -13,6 +13,11 @@ input {
   margin: 10px 0;
 }
 
+h1 {
+  color: #414456;
+  margin-left: 40px;
+}
+
 .item {
   align-items: center;
   width: 150px;
@@ -21,7 +26,6 @@ input {
   justify-content: center;
   flex-direction: column;
   margin: 14px;
-  padding: 0px 10px;
   box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
   box-shadow: 0px 1px 5px 0px #676767;
   box-shadow: 2px 4px 12px 0px #888888;
@@ -32,15 +36,24 @@ h2 {
   text-transform: capitalize;
 }
 
+form {
+  display: flex;
+  flex-direction: column;
+  margin-left: 40px;
+}
+
+.status {
+  width: 325px;
+  height: 26px;
+  cursor: pointer;
+}
+
 .append-item {
   display: flex;
   flex-wrap: wrap;
-  /*height: 60vh;*/
   width: 100vw;
-}
-
-.item-info {
-  border: 1px solid blue;
+  align-items: center;
+  justify-content: center;
 }
 
 h2 {
@@ -50,7 +63,6 @@ h2 {
 .item-title {
   cursor: pointer;
 }
-
 
 .garage-opener,
 .new-item-save {
@@ -72,6 +84,13 @@ h2 {
 
 .new-item-save {
   display: inline-block;
+  margin: 16px 0;
+  width: 348px;
+}
+
+.new-item-save:hover {
+  color: #fff;
+  background-color: #414456;
 }
 
 .garage-door {
@@ -81,8 +100,30 @@ h2 {
   overflow: hidden;
   position: absolute;
   z-index: 100;
+  background-image: url('../assets/door.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+
 }
 
-.append-reveal {
-  /*display: block;*/
+/*.hide-content {
+  display: flex;
+  flex-direction: column;
+}*/
+
+.inactive {
+  display: none;
+}
+
+.active {
+  display: block;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #405780;
+  width: 100%;
+  color: white;
 }

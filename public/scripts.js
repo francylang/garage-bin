@@ -1,12 +1,10 @@
-$(document).ready(() => {
-  fetchItems();
-})
-
 const appendItem = (item) => {
   $('.append-item').append(
     ` <div class="item">
-         <h2 class="item-title">${item.item}</h2>
-         <div class="hide-content">
+      <div class="title">
+         <h2 class="item-title item-id-${item.id}" id="item${item.id}">${item.item}</h2>
+       </div>
+         <div class="item-id-${item.id} inactive">
            <h2 class="item-reason">${item.reason}</h2>
            <h2 class="item-reason">${item.cleanliness}</h2>
          </div>
@@ -14,16 +12,7 @@ const appendItem = (item) => {
   );
 }
 
-$('.append-item').on('click', '.item',
-  (event => revealContent(event.target)))
-
-const revealContent = () => {
-  console.log(event.target);
-  $(event.target).toggleClass('reveal');
-}
-
 const displayCount = (items) => {
-  console.log(items);
   $('.item-count').text(`Total Count: ${items.length}`);
   $('.rancid-count').text(`Rancid: ${countCleanliness(items, 'rancid')}`);
   $('.sparkling-count').text(`Sparkling: ${countCleanliness(items, 'sparkling')}`);
@@ -37,7 +26,18 @@ const countCleanliness = (items, status) => {
 
 const appendAllItems = (items) => {
   $('.append-item').html('')
-  items.forEach(item => appendItem(item))
+  const sorted = items.sort((a, b) => {
+  const nameA = a.item.toUpperCase();
+  const nameB = b.item.toUpperCase();
+    if (nameA < nameB) {
+      return -1;
+    }
+    if (nameA > nameB) {
+      return 1;
+    }
+    return 0;
+    });
+  sorted.forEach(item => appendItem(item))
 }
 
 const fetchItems = () => {
@@ -71,7 +71,6 @@ const postItem = (event) => {
     $('.cleanliness').val('');
 }
 
-
 const toggleGarage = () => {
   $('.garage-door').slideToggle(3000, () => {
     const text = $('.garage-opener').text();
@@ -81,5 +80,27 @@ const toggleGarage = () => {
   });
 }
 
+const revealContent = (event) => {
+  const itemNumber = event.target.id.slice(4)
+  const revealMe = $(`.item-id-${itemNumber}`)
+  revealMe.toggleClass('active')
+}
+
+const sortItems = () => {
+  const sorted = items.sort((a, b) => {
+  const nameA = a.name.toUpperCase();
+  const nameB = b.name.toUpperCase();
+  if (nameA < nameB) {
+    return -1;
+  }
+  if (nameA > nameB) {
+    return 1;
+  }
+  return 0;
+  });
+}
+
 $('.garage-opener').on('click', toggleGarage)
 $('.new-item-save').on('click', postItem);
+$('.append-item').on('click', '.item-title', (event) => revealContent(event));
+fetchItems();

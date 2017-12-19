@@ -1,37 +1,39 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="styles.css">
 
-    <title>Garage Bin</title>
-  </head>
-  <body>
-    <main>
-      <h1>Garage Bin</h1>
-      <form>
-        <input class="item-name" type="text" placeholder="item"/>
-        <input class="reason" type="text" placeholder="reason" />
-        <select class="status">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="styles.css">
+
+  <title>Garage Bin</title>
+</head>
+
+<body>
+  <main>
+    <h1>Garage Bin</h1>
+    <form>
+      <input class="item-name" type="text" placeholder="item" />
+      <input class="reason" type="text" placeholder="reason" />
+      <select class="status">
           <option class="cleanliness" value="sparkling"selected>sparkling</option>
           <option class="cleanliness" value="dusty">dusty</option>
           <option class="cleanliness" value="rancid">rancid</option>
         </select>
-        <input class="new-item-save" type="submit" />
-      </form>
-      <div class="garage-opener">Open Garage</div>
+      <input class="new-item-save" type="submit" />
+    </form>
+    <div class="garage-opener">Open Garage</div>
+    <div class="garage-door"></div>
+    <div class="append-item"></div>
+    <div class="append-count">
+      <h3 class="item-count"></h3>
+      <h3 class="rancid-count"></h3>
+      <h3 class="sparkling-count"></h3>
+      <h3 class="dusty-count"></h3>
+    </div>
+  </main>
+  <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+  <script type='text/javascript' src='./scripts.js'></script>
+</body>
 
-      <div class="garage-door"></div>
-        <div class="append-item"></div>
-        <div class="append-count">
-          <h3 class="item-count"></h3>
-          <h3 class="rancid-count"></h3>
-          <h3 class="sparkling-count"></h3>
-          <h3 class="dusty-count"></h3>
-      </div>
-    </main>
-    <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
-    <script type='text/javascript' src='./scripts.js'></script>
-  </body>
 </html>
