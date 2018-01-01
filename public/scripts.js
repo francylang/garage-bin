@@ -46,6 +46,24 @@ const appendAllItems = (items) => {
   sorted.forEach(item => appendItem(item))
 }
 
+
+const sortDescending = (items) => {
+  $('.append-item').html('')
+  const sorted = items.sort((a, b) => {
+  const nameA = a.item.toUpperCase();
+  const nameB = b.item.toUpperCase();
+    if (nameA > nameB) {
+      return -1;
+    }
+    if (nameA < nameB) {
+      return 1;
+    }
+    return 0;
+    });
+  sorted.forEach(item => appendItem(item))
+}
+
+
 const fetchItems = () => {
   fetch('/api/v1/items')
     .then(response => response.json())
@@ -55,6 +73,18 @@ const fetchItems = () => {
     })
     .catch(error => console.log(error))
 }
+
+const fetchSortItems = () => {
+  fetch('/api/v1/items')
+    .then(response => response.json())
+    .then(storedItems => {
+      sortDescending(storedItems)
+      displayCount(storedItems)
+    })
+    .catch(error => console.log(error))
+}
+
+
 
 const postItem = (event) => {
   event.preventDefault();
@@ -118,6 +148,8 @@ const updateStatus = () => {
 
 $('.append-item').on('change', 'select', (event) => updateStatus(event))
 $('.garage-opener').on('click', toggleGarage)
+$('.ascending').on('click', fetchItems)
+$('.descending').on('click', fetchSortItems)
 $('.new-item-save').on('click', postItem);
 $('.append-item').on('click', '.item-title', (event) => revealContent(event));
 fetchItems();
