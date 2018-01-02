@@ -4,7 +4,7 @@ body {
 }
 
 input {
-  width: 25%;
+  width: 330px;
   background-color: transparent;
   border: none;
   border: 1px solid #bdbdbd;
@@ -31,8 +31,9 @@ h4 {
   box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
   box-shadow: 0px 1px 5px 0px #676767;
   box-shadow: 2px 4px 12px 0px #888888;
-  border-radius: 8%;
 }
+
+
 
 h2 {
   text-transform: capitalize;
@@ -45,7 +46,7 @@ form {
 }
 
 .status {
-  width: 368px;
+  width: 350px;
   height: 26px;
   cursor: pointer;
 }
@@ -87,7 +88,7 @@ h2 {
 .new-item-save {
   display: inline-block;
   margin: 16px 0;
-  width: 368px;
+  width: 350px;
 }
 
 .new-item-save:hover {
@@ -137,4 +138,24 @@ h2 {
   display: flex;
   justify-content: space-around;
   color: #405780;
+}
+
+button {
+  border: 1px solid #414456;
+  margin: 0 0 20px 45px;
+  align-items: center;
+  justify-content: center;
+  color: #414456;
+  background-color: transparent;
+  font-size: 18px;
+  text-decoration: none;
+  padding: 4px 10px;
+  width: 198px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+button:hover {
+  color: #fff;
+  background-color: #414456;
 }
