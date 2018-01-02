@@ -84,8 +84,6 @@ const fetchSortItems = () => {
     .catch(error => console.log(error))
 }
 
-
-
 const postItem = (event) => {
   event.preventDefault();
   const newItem = $('.item-name').val();
@@ -102,9 +100,13 @@ const postItem = (event) => {
       fetchItems()
     })
     .catch(error => console.log(error))
-    $('.item-name').val('');
-    $('.reason').val('');
-    $('.cleanliness').val('');
+    clearVal()
+}
+
+const clearVal = () => {
+  $('.item-name').val('');
+  $('.reason').val('');
+  $('.cleanliness').val('');
 }
 
 const toggleGarage = () => {
@@ -130,17 +132,13 @@ const patchStatus = (id, body) => {
     },
     body: JSON.stringify(body)
   })
-    .then(response => response.json())
+    .then(response => console.log(response))
     .catch(error => console.log(error));
 };
 
-const updateStatus = () => {
-  const updateClean = {
-    cleanliness: $(event.target).val()
-  }
-  console.log(updateClean);
+const updateStatus = (items) => {
+  const updateClean = { cleanliness: $(event.target).val() }
   const id = $(event.target).closest('.status-update').attr('id').slice(4)
-  console.log(id);
 
   patchStatus(id, updateClean)
   $(`.clean-${id}`).text(`${$(event.target).val()}`)
